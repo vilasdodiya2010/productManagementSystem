@@ -4,7 +4,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
     <title>Product Reel-time Feedback System</title>
-
+     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <!-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> -->
 
     <style>

@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.frontend.guest')
+
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
@@ -49,7 +50,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div>  
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
@@ -61,6 +62,15 @@
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                @if (Route::has('register'))
+                                        <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{ __('New user?') }}
+                                        </a>
                                 @endif
                             </div>
                         </div>
