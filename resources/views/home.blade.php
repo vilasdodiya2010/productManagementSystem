@@ -1,20 +1,24 @@
-@extends('layouts.backend.guest')
+@extends('layouts.frontend.guest')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <!-- <div class="card-header">{{ __('Dashboard') }}</div> -->
 
                 <div class="card-body">
-                    @if (session('status'))
+                    <h1>Welcome to Your Product Feedback App</h1>
+                    <p>Discover and provide feedback on our amazing products!</p>
+
+
+                    <!-- @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('You are logged in!') }} -->
                 </div>
             </div>
         </div>

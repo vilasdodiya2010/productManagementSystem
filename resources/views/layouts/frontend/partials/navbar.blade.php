@@ -9,7 +9,7 @@
                     <div class="top-menu-section">
                         <ul>
                             <li><a href="#">Home</a></li>
-                            <li><a href="#">Products</a></li>
+                            <li><a href="{{ route('products')}}">Products</a></li>
                             @if (Route::has('login'))
                                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                                     @auth
