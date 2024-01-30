@@ -2,11 +2,12 @@
 
 <html
     lang="en"
-    class="light-style layout-menu-fixed"
+    class="light-style layout-menu-fixed layout-compact"
     dir="ltr"
     data-theme="theme-default"
     data-template="vertical-menu-template-free">
 
+    
     <head>
         @include('layouts.backend.partials.header') 
     </head>

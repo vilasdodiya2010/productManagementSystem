@@ -2,7 +2,7 @@
 
 <html
     lang="en"
-    class="light-style layout-menu-fixed"
+    class="light-style layout-wide customizer-hide"
     dir="ltr"
     data-theme="theme-default"
     data-template="vertical-menu-template-free">
@@ -13,7 +13,7 @@
 
     <body>
         <!-- Layout wrapper -->
-        @include('layouts.frontend.partials.navbar')
+        
         <main>
             <div class="layout-wrapper layout-content-navbar">
                 <div class="layout-container">
