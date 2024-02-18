@@ -206,7 +206,8 @@
       <!-- Apps -->
       <li class="menu-item">
         <a
-          href="{{ route('supplierList')}}"
+          href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-email.html"
+          target="_blank"
           class="menu-link">
          
           <i class="menu-icon tf-icons bx bx-user"></i>
@@ -217,6 +218,7 @@
       <li class="menu-item">
         <a
           href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-email.html"
+          target="_blank"
           class="menu-link">
           <i class="menu-icon tf-icons bx bx-user"></i>
           <div data-i18n="Customers">Customers</div>
@@ -226,6 +228,7 @@
       <li class="menu-item">
         <a
           href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-chat.html"
+          target="_blank"
           class="menu-link">
           <i class="menu-icon tf-icons bx bx-category"></i>
           <div data-i18n="Category">Category</div>
@@ -234,6 +237,7 @@
       <li class="menu-item">
         <a
           href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-calendar.html"
+          target="_blank"
           class="menu-link">
           <i class="menu-icon tf-icons bx bx-calendar"></i>
           <div data-i18n="Products">Products</div>
@@ -242,6 +246,7 @@
       <li class="menu-item">
         <a
           href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-kanban.html"
+          target="_blank"
           class="menu-link">
           <i class="menu-icon tf-icons bx bx-grid"></i>
           <div data-i18n="Product Variations">Product Variations</div>

@@ -1,33 +1,46 @@
-@extends('layouts.backend.guest')
+@extends('layouts.backend.main')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-11">
             <div class="card mt-5">
                 <!-- <div class="card-header">{{ __('Dashboard') }}</div> -->
-                <a class="btn btn-success sm" href="javascript:void(0)" id="createNewProduct"> Create New Product</a>
-                <div class="product_list_title text-center border-bottom my-3">
-                    <h3>Product Details</h3>
+
+                <div class="card-header flex-column flex-md-row">
+                    <!-- <div class="head-label text-center">
+                        <h5 class="card-title mb-0">DataTable with Buttons</h5>
+                    </div> -->
+                    <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                        <div class="dt-buttons btn-group flex-wrap">
+                            <div class="btn-group">
+                                <!-- <button class="btn buttons-collection dropdown-toggle btn-label-primary me-2" tabindex="0" aria-controls="DataTables_Table_0" type="button" aria-haspopup="dialog" aria-expanded="false"><span><i class="bx bx-export me-sm-1"></i> <span class="d-none d-sm-inline-block">Export</span></span>
+                                </button> -->
+                            </div> 
+                            <button id="createNewProduct" class="btn btn-secondary create-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span><i class="bx bx-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Add Product</span></span></button>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="card-body">
-                    <div class="product_container">
-                       <div class="product_list">
-                           <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                      <th scope="col">#</th>
-                                      <th scope="col">Product Name</th>
-                                      <th scope="col">Category</th>
-                                      <th scope="col">Image</th>
-                                       <th width="280px">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                </tbody>
-                            </table>
-                       </div>
+                    <div class="card">
+                        <h5 class="card-header">Product Details</h5>
+                        <div class="table-responsive text-nowrap">
+                          <table class="table supplier_list">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Image</th>
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                              
+                            </tbody>
+                          </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -23,5 +23,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/supplierList', [App\Http\Controllers\SupplierController::class, 'supplierList'])->name('supplierList');
 Route::get('/productsList', [App\Http\Controllers\ProductController::class, 'index'])->name('productsList');
 Route::resource('products',App\Http\Controllers\ProductController::class);
