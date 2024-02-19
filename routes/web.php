@@ -27,3 +27,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/supplierList', [App\Http\Controllers\SupplierController::class, 'supplierList'])->name('supplierList');
 Route::get('/productsList', [App\Http\Controllers\ProductController::class, 'index'])->name('productsList');
 Route::resource('products',App\Http\Controllers\ProductController::class);
+Route::resource('category',App\Http\Controllers\CategoryController::class);

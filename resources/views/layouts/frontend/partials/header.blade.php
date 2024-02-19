@@ -6,7 +6,8 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <title>PMS</title>
     <meta name="description" content="" />
-
+     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
     <!-- Fonts -->
@@ -36,8 +37,7 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
 
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <!-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> -->
+   <!-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> -->
 
     <style>
       .bd-placeholder-img {

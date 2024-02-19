@@ -225,7 +225,7 @@
 
       <li class="menu-item">
         <a
-          href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-chat.html"
+          href="{{ route('category.index')}}"
           class="menu-link">
           <i class="menu-icon tf-icons bx bx-category"></i>
           <div data-i18n="Category">Category</div>
