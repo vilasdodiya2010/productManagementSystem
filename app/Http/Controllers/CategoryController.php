@@ -14,6 +14,11 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(Request $request)
     {
         $categoryData = '';
@@ -46,6 +51,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        dd($request);
         Category::updateOrCreate(
             ['id' => $request->id],
             ['category_name' => $request->category_name, 'category_detail' => $request->category_detail]

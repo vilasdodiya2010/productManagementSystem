@@ -126,7 +126,7 @@
 
             $('body').on('click', '.editCategory', function() {
                 var id = $(this).data('id');
-                $.get("{{ route(category.index') }}" + '/' + id + '/edit', function(data) {
+                $.get("{{ route('category.index') }}" + '/' + id + '/edit', function(data) {
                     $('#modelHeading').html("Edit Category");
                     $('#savedata').val("edit-user");
                     $('#categoryModel').modal('show');
@@ -139,7 +139,7 @@
             $('#savedata').click(function(e) {
                 e.preventDefault();
                 $(this).html('Sending..');
-
+                
                 $.ajax({
                     data: $('#categoryForm').serialize(),
                     url: "{{ route('category.store') }}",
