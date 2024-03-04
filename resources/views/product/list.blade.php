@@ -16,7 +16,7 @@
                             <div class="btn-group">
                                 <!-- <button class="btn buttons-collection dropdown-toggle btn-label-primary me-2" tabindex="0" aria-controls="DataTables_Table_0" type="button" aria-haspopup="dialog" aria-expanded="false"><span><i class="bx bx-export me-sm-1"></i> <span class="d-none d-sm-inline-block">Export</span></span>
                                 </button> -->
-                            </div> 
+                            </div>
                             <button id="createNewProduct" class="btn btn-secondary create-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button"><span><i class="bx bx-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Add Product</span></span></button>
                         </div>
                     </div>
@@ -26,20 +26,20 @@
                     <div class="card">
                         <h5 class="card-header">Product Details</h5>
                         <div class="table-responsive text-nowrap">
-                          <table class="table supplier_list">
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>Product Name</th>
-                                <th>Category</th>
-                                <th>Image</th>
-                                <th>Actions</th>
-                              </tr>
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                              
-                            </tbody>
-                          </table>
+                            <table class="table supplier_list">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Product Name</th>
+                                        <th>Category</th>
+                                        <th>Image</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
             </div>
             <div class="modal-body">
                 <form id="productForm" name="productForm" class="form-horizontal">
-                   <input type="hidden" name="product_id" id="product_id">
+                    <input type="hidden" name="product_id" id="product_id">
                     <div class="form-group">
                         <label for="product_name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-12">
@@ -82,7 +82,7 @@
                             </select>
                         </div>
                     </div>
-     
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Details</label>
                         <div class="col-sm-12">
@@ -96,10 +96,10 @@
                             <input type="file" class="form-control" id="image" name="image" placeholder="Choose image" value="" required="">
                         </div>
                     </div>
-      
+
                     <div class="col-sm-offset-2 col-sm-10">
-                     <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
-                     </button>
+                        <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
+                        </button>
                     </div>
                 </form>
             </div>
@@ -109,83 +109,99 @@
 @endsection
 
 <script type="text/javascript">
-  $(function () {
-     
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-    });
-    
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('products.index') }}",
-        columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'name', name: 'name'},
-            {data: 'category', name: 'category'},
-            {data: 'image', name: 'image'},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
-    });
-     
-    $('#createNewProduct').click(function () {
-        $('#saveBtn').val("create-product");
-        $('#product_id').val('');
-        $('#productForm').trigger("reset");
-        $('#modelHeading').html("Create New Product");
-        $('#productModel').modal('show');
-    });
-    
-    $('body').on('click', '.editProduct', function () {
-      var product_id = $(this).data('id');
-      $.get("{{ route('products.index') }}" +'/' + product_id +'/edit', function (data) {
-          $('#modelHeading').html("Edit Product");
-          $('#saveBtn').val("edit-user");
-          $('#productModel').modal('show');
-          $('#product_id').val(data.id);
-          $('#product_name').val(data.product_name);
-          $('#product_detail').val(data.product_detail);
-      })
-   });
-    
-    $('#saveBtn').click(function (e) {
-        e.preventDefault();
-        $(this).html('Sending..');
-    
-        $.ajax({
-          data: $('#productForm').serialize(),
-          url: "{{ route('products.store') }}",
-          type: "POST",
-          dataType: 'json',
-          success: function (data) {
-              $('#productForm').trigger("reset");
-              $('#productModel').modal('hide');
-              table.draw();
-          },
-          error: function (data) {
-              console.log('Error:', data);
-              $('#saveBtn').html('Save Changes');
-          }
-      });
-    });
-    
-    $('body').on('click', '.deleteProduct', function () {
-        var product_id = $(this).data("id");
-        confirm("Are You sure want to delete !");
-      
-        $.ajax({
-            type: "DELETE",
-            url: "{{ route('products.store') }}"+'/'+product_id,
-            success: function (data) {
-                table.draw();
-            },
-            error: function (data) {
-                console.log('Error:', data);
+    $(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('products.index') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'category',
+                    name: 'category'
+                },
+                {
+                    data: 'image',
+                    name: 'image'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        });
+
+        $('#createNewProduct').click(function() {
+            $('#saveBtn').val("create-product");
+            $('#product_id').val('');
+            $('#productForm').trigger("reset");
+            $('#modelHeading').html("Create New Product");
+            $('#productModel').modal('show');
+        });
+
+        $('body').on('click', '.editProduct', function() {
+            var product_id = $(this).data('id');
+            $.get("{{ route('products.index') }}" + '/' + product_id + '/edit', function(data) {
+                $('#modelHeading').html("Edit Product");
+                $('#saveBtn').val("edit-user");
+                $('#productModel').modal('show');
+                $('#product_id').val(data.id);
+                $('#product_name').val(data.product_name);
+                $('#product_detail').val(data.product_detail);
+            })
+        });
+
+        $('#saveBtn').click(function(e) {
+            e.preventDefault();
+            $(this).html('Sending..');
+
+            $.ajax({
+                data: $('#productForm').serialize(),
+                url: "{{ route('products.store') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function(data) {
+                    $('#productForm').trigger("reset");
+                    $('#productModel').modal('hide');
+                    table.draw();
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                    $('#saveBtn').html('Save Changes');
+                }
+            });
+        });
+
+        $('body').on('click', '.deleteProduct', function() {
+            var product_id = $(this).data("id");
+            confirm("Are You sure want to delete !");
+
+            $.ajax({
+                type: "DELETE",
+                url: "{{ route('products.store') }}" + '/' + product_id,
+                success: function(data) {
+                    table.draw();
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                }
+            });
+        });
+
     });
-     
-  });
 </script>

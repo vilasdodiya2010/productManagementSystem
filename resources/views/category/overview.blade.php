@@ -23,10 +23,10 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="card">
-                        <h5 class="card-header">Category Details</h5>
+                    <div class="">
+                        <h5 class="">Category Details</h5>
                         <div class="table-responsive text-nowrap">
-                          <table class="table supplier_list">
+                          <table class="table category_list">
                             <thead>
                               <tr>
                                 <th>#</th>
@@ -47,38 +47,39 @@
     </div>
 </div>
 
-    <div class="modal fade" id="categoryModel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modelHeading"></h4>
-                </div>
-                <div class="modal-body">
-                    <form id="categoryForm" name="categoryForm" class="form-horizontal">
-                       <input type="hidden" name="id" id="id">
-                        <div class="form-group">
-                            <label for="category_name" class="col-sm-2 control-label">Category Name</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Category name" value="" required>
-                            </div>
+<div class="modal fade" id="categoryModel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modelHeading"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm" name="categoryForm" class="form-horizontal" method="POST">
+                    @csrf
+                    <input type="hidden" name="id" id="id">
+                    <div class="form-group">
+                        <label for="category_name" class="col-sm-3 control-label">Category Name</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Category name" value="" required>
                         </div>
-         
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="category_detail">Category Detaillll</label>
-                            <div class="col-sm-12">
-                                <textarea id="category_detail" name="category_detail" required placeholder="Category Detail" class="form-control"></textarea>
-                            </div>
+                    </div>
+        
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="category_detail">Category Detail</label>
+                        <div class="col-sm-12">
+                            <textarea id="category_detail" name="category_detail" required placeholder="Category Detail" class="form-control"></textarea>
                         </div>
-          
-                        <div class="col-sm-offset-2 col-sm-10 mt-2">
-                         <button type="submit" class="btn btn-primary" id="savedata" value="create">Save
-                         </button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+        
+                    <div class="col-sm-offset-2 col-sm-10 mt-2">
+                        <button type="submit" class="btn btn-primary" id="savedata" value="create">Save
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
     
 @endsection
 
@@ -91,7 +92,7 @@
                 }
             });
 
-            var table = $('.data-table').DataTable({
+            var table = $('.category_list').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('category.index') }}",
@@ -124,22 +125,28 @@
                 $('#categoryModel').modal('show');
             });
 
-            $('body').on('click', '.editCategory', function() {
+            $('body').on('click', '.editCategory', function(e) {
                 var id = $(this).data('id');
-                $.get("{{ route('category.index') }}" + '/' + id + '/edit', function(data) {
-                    $('#modelHeading').html("Edit Category");
-                    $('#savedata').val("edit-user");
-                    $('#categoryModel').modal('show');
-                    $('#id').val(data.id);
-                    $('#category_name').val(data.category_name);
-                    $('#category_detail').val(data.category_detail);
-                })
+                $(this).html('');
+                $.ajax({
+                    url :"/category/"+id+"/edit",
+                    dataType:"json",
+                    success:function(data)
+                    {
+                        console.log(data.result.id);
+                        $('#modelHeading').html("Edit Category");
+                        $('#savedata').val("edit-user");
+                        $('#categoryModel').modal('show');
+                        $('#id').val(data.result.id);
+                        $('#category_name').val(data.result.category_name);
+                        $('#category_detail').val(data.result.category_detail);
+                    }
+                });
             });
 
             $('#savedata').click(function(e) {
                 e.preventDefault();
-                $(this).html('Sending..');
-                
+                $(this).html('Save Changes..');
                 $.ajax({
                     data: $('#categoryForm').serialize(),
                     url: "{{ route('category.store') }}",
@@ -149,6 +156,7 @@
                         $('#categoryForm').trigger("reset");
                         $('#categoryModel').modal('hide');
                         table.draw();
+                        $('#savedata').html('Save');
                     },
                     error: function(data) {
                         console.log('Error:', data);
@@ -159,8 +167,38 @@
 
             $('body').on('click', '.deleteCategory', function() {
                 var id = $(this).data("id");
+                var delete_url = $(this).data("url");
+
+                if (confirm("Are You sure want to delete !")) {
+                    $.ajax({
+                        url: delete_url,
+                        type: "DELETE",
+                        dataType: "json",
+                        data: {
+                            _token: "{{csrf_token()}}"
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            if (response.delete) {
+                                /* delete_row.fadeOut(1000, function() {
+                                    delete_row.remove();
+                                    $('#supplier_table').DataTable().ajax.reload();
+                                    toastr.success("{{__('messages.success')}}", "{{__('messages.Record Deleted Successfully')}}");
+                                }); */
+                                // table.draw();
+                                $('.category_list').DataTable().ajax.reload();
+                                alert('Data Deleted');
+                            } else {
+                                services_toastr("{{__('messages.error')}}", 'Danger', 'something went to wrong !!');
+                            }
+                        }
+                    })
+                }
+
+
+                /* var id = $(this).data("id");
                 confirm("Are You sure want to delete this Category!");
-               /* $.ajax({
+               $.ajax({
                     type: "DELETE",
                     url: "{{ route('category.store') }}" + '/' + id,
                     success: function(data) {
